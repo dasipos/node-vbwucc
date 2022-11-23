@@ -57,13 +57,14 @@ async function manageTaskMenu(storage: TaskStorage, taskId: number) {
   console.log(`Nazev: ${task.name}`);
   console.log(`Stav: ${task.state}`);
   console.log('---');
-  console.log('');
 
   if (isTaskWithText(task)) {
     console.log('Text: ' + task.text);
   } else if (isTaskWithList(task)) {
     for (const item of task.list) console.log('* ' + item);
   }
+  console.log('---');
+  console.log('');
 
   console.log('P ... Oznacit ukol jako rozpracovany');
   console.log('H ... Oznacit ukol jako hotovy');
