@@ -38,7 +38,7 @@ async function createTaskMenu(storage: TaskStorage) {
   console.log('T ... Chci ukol s textem');
   console.log('S ... Chci ukol se seznamem');
 
-  const input = await consolePrompt();
+  const input = (await consolePrompt()).toLowerCase();
 
   if (input === 'T') {
     await createTaskWithTextMenu(storage, taskName);
@@ -56,6 +56,8 @@ async function manageTaskMenu(storage: TaskStorage, taskId: number) {
   console.log('DETAIL UKOLU');
   console.log(`Nazev: ${task.name}`);
   console.log(`Stav: ${task.state}`);
+  console.log('---');
+  console.log('');
 
   if (isTaskWithText(task)) {
     console.log('Text: ' + task.text);
@@ -70,7 +72,7 @@ async function manageTaskMenu(storage: TaskStorage, taskId: number) {
   console.log('S ... Smazat ukol');
   console.log('Z ... Zavrit ukol');
 
-  const action = await consolePrompt();
+  const action = (await consolePrompt()).toLowerCase();
 
   if (action === 'p') {
     storage.setTaskCompletionStatus(taskId, TaskState.INPROGRESS);
@@ -131,7 +133,7 @@ async function createTaskWithListMenu(storage: TaskStorage, taskName: string) {
   let array: string[] = [];
   let finished = false;
   while (!finished) {
-    console.log('Polozka seznamu:');
+    console.log('Polozka seznamu (. pro konec seznamu):');
     const text = await consolePrompt();
 
     if (text === '.') finished = true;
