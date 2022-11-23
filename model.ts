@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { TaskState } from './taskstate';
 
 export interface TaskWithText extends AbstractTask {
