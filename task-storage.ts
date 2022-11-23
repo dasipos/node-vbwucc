@@ -1,4 +1,6 @@
+import { stringify } from 'querystring';
 import { Task } from './model';
+import { TaskState } from './taskstate';
 
 export class TaskStorage {
   private tasks: Task[] = [];
@@ -7,11 +9,23 @@ export class TaskStorage {
     return this.tasks;
   }
 
-  createTask(taskName: string) {
+  createTaskWithText(taskName: string, text: string) {
     const newTask: Task = {
       id: this.generateNewTaskId(),
       name: taskName,
-      complete: false,
+      state: TaskState.TODO,
+      text: text,
+    };
+
+    this.tasks.push(newTask);
+  }
+
+  createTaskWithList(taskName: string, list: string[]) {
+    const newTask: Task = {
+      id: this.generateNewTaskId(),
+      name: taskName,
+      state: TaskState.TODO,
+      list: list,
     };
 
     this.tasks.push(newTask);
@@ -32,8 +46,8 @@ export class TaskStorage {
     this.tasks.splice(taskIndex, 1);
   }
 
-  setTaskCompletionStatus(taskId: number, completed: boolean) {
-    this.getTaskById(taskId).complete = completed;
+  setTaskCompletionStatus(taskId: number, state: TaskState) {
+    this.getTaskById(taskId).state = state;
   }
 
   private generateNewTaskId(): number {
