@@ -40,9 +40,9 @@ async function createTaskMenu(storage: TaskStorage) {
 
   const input = (await consolePrompt()).toLowerCase();
 
-  if (input === 'T') {
+  if (input === 't') {
     await createTaskWithTextMenu(storage, taskName);
-  } else if (input === 'S') {
+  } else if (input === 's') {
     await createTaskWithListMenu(storage, taskName);
   }
 
